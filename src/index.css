@@ -1,13 +1,69 @@
+:root {
+	--color0: #FFF;
+	--color1: #F7F7F2;
+	--color2: #EFEFE6;
+	--color3: #E8E8D9;
+	--color4: #E0E0CC;
+	--color5: #D8D8C0;
+	--color6: #D0D0B3;
+	--color7: #C9C9A6;
+	--color8: #C1C19A;
+	--color9: #B9B98D;
+	--color10: #B1B181;
+	--color11: #AAAA74;
+	--color12: #A2A267;
+	--color13: #98985D;
+	--color14: #8B8B55;
+	--color15: #7E7E4E;
+	--color16: #727246;
+	--color17: #65653E;
+	--color18: #595936;
+	--color19: #4C4C2F;
+	--color20: #3F3F27;
+	--color21: #33331F;
+	--color22: #262617;
+	--color23: #191910;
+	--color24: #0D0D08;
+	--color25: #000;
+
+	--compcolor1: #F2F2F7;
+	--compcolor2: #E6E6EF;
+	--compcolor3: #D9D9E8;
+	--compcolor4: #CCCCE0;
+	--compcolor5: #C0C0D8;
+	--compcolor6: #B3B3D0;
+	--compcolor7: #A6A6C9;
+	--compcolor8: #9A9AC1;
+	--compcolor9: #8D8DB9;
+	--compcolor10: #8181B1;
+	--compcolor11: #7474AA;
+	--compcolor12: #6767A2;
+	--compcolor13: #5D5D98;
+	--compcolor14: #55558B;
+	--compcolor15: #4E4E7E;
+	--compcolor16: #464672;
+	--compcolor17: #3E3E65;
+	--compcolor18: #363659;
+	--compcolor19: #2F2F4C;
+	--compcolor20: #27273F;
+	--compcolor21: #1F1F33;
+	--compcolor22: #171726;
+	--compcolor23: #101019;
+	--compcolor24: #08080D;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overflow: hidden;
+	font-family: Montserrat;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+h2 {
+	color: var(--compcolor18);
 }

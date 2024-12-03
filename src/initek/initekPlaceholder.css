@@ -1,0 +1,101 @@
+#initek-placeholder {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+}
+
+#initek-placeholder span {
+    display: flex;
+    align-items: center;
+    /* margin: 80px 0; */
+    max-height: 1080px;
+    width: 100%;
+}
+
+#initek-header {
+    height: 128px;
+}
+
+#initek-home {
+    min-height: 60vh;
+    margin: 80px 0 160px 0;
+}
+
+#initek-aboutus {
+    display: flex;
+    justify-content: center;
+}
+
+#initek-services {
+    height: 60px;
+}
+
+.initek-background {
+    box-sizing: border-box;
+    display: flex;
+    border-bottom: 100vw solid #061323;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    max-width: 1400px;
+    transform: rotate(90deg);
+    width: 120vh;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Header */
+
+#initek-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 8rem;
+    width: 100%;
+    margin: 32px 0;
+    z-index: 2;
+    font-family: Montserrat;
+}
+
+.header-img-container {
+    height: 64px;
+    margin-left: 48px;
+    width: 600px;
+}
+
+.header-img-container > img {
+    height: 100%;
+    width: 156px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row;
+    height: 64px;
+    margin-left: 60px;
+    margin-right: 48px;
+    max-width: 800px;
+    white-space: nowrap;
+    width: calc(50vw + 660px);
+}
+
+.nav-item {
+    color: #a8c7f0;
+    font-size: 1.2rem;
+    padding: 0 1rem;
+    text-align: center;
+    text-transform: uppercase;
+}
