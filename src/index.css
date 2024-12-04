@@ -8,7 +8,7 @@
 	--color6: #D0D0B3;
 	--color7: #C9C9A6;
 	--color8: #C1C19A;
-	--color9: #B9B98D;
+	--color9: rgb(185, 185, 141);
 	--color10: #B1B181;
 	--color11: #AAAA74;
 	--color12: #A2A267;
@@ -56,8 +56,9 @@ body {
 	margin: 0;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	overflow: hidden;
+	overflow-x: hidden;
 	font-family: Montserrat;
+	background-color: var(--compcolor3);
 }
 
 code {
@@ -66,4 +67,10 @@ code {
 
 h2 {
 	color: var(--compcolor18);
+}
+
+section {
+	display: flex;
+	flex-direction: column;
+	z-index: 10;
 }

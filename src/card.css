@@ -41,7 +41,7 @@ section.card:has(a:hover) {
     max-width: 560px;
     max-height: calc(640px *0.66);
     background-color: var(--compcolor4);
-    overflow: hidden;
+    overflow-x: hidden !important;
     border-radius: 16px;
     cursor: pointer;
     transition: all 0.5s ease-in-out;
