@@ -7,19 +7,13 @@ const Particles = ({id, particleCount=160, particleSpeed=0.1, particleSize=1, gr
     const animationFrameIdRef = useRef(null);
 
     const initializeParticles = () => {
-        // Destroy existing instances
-        // if (window.pJSDom && window.pJSDom.length > 0) {
-        //     window.pJSDom[0].pJS.fn.vendors.destroypJS();
-        //     window.pJSDom = [];
-        // }
-
         window.particlesJS(id, {
             particles: {
                 number: {
                     value: particleCount,
                     density: { enable: true, value_area: 800 },
                 },
-                color: { value: '#ffffff' },
+                color: { value: '#b0e0e6' },
                 shape: {
                     type: 'circle',
                     stroke: { width: 0, color: '#000000' },
@@ -29,7 +23,7 @@ const Particles = ({id, particleCount=160, particleSpeed=0.1, particleSize=1, gr
                 opacity: {
                     value: 1,
                     random: true,
-                    anim: { enable: true, speed: 1, opacity_min: 0, sync: false },
+                    anim: { enable: true, speed: 2, opacity_min: 0, sync: false },
                 },
                 size: {
                     value: particleSize,
@@ -94,7 +88,7 @@ const Particles = ({id, particleCount=160, particleSpeed=0.1, particleSize=1, gr
     }, [particleCount, particleSpeed, particleSize]);
 
     return (
-        <div className="particles-container" style={{background: `linear-gradient(to bottom, ${gradient.toString()})`}}>
+        <div className="particles-container">
             <div className="particles" id={id}/>
         </div>
     );

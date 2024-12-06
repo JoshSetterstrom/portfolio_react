@@ -50,6 +50,7 @@
 	--compcolor22: #171726;
 	--compcolor23: #101019;
 	--compcolor24: #08080D;
+	--compcolor25: #19192a;
 }
 
 body {
@@ -75,4 +76,31 @@ h2 {
 
 section {
 
+}
+
+@keyframes rotate {
+	from {
+	  transform: rotate(0deg);
+	}
+	to {
+	  transform: rotate(360deg);
+	}
+  }
+
+#cycle-gradient-container {
+	/* display: flex; */
+	height: 75vh;
+	width: 100%;
+	overflow: hidden;
+}
+
+#cycle-gradient {
+	display: flex;
+	position: relative;
+	width: 500vw;
+	min-width: 2000px;
+	top: -200vw;
+	left: -20vw;
+
+	animation: rotate 400s linear infinite;
 }

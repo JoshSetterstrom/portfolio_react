@@ -1,3 +1,12 @@
+.particles-container {
+    display: flex;
+    position: absolute;
+    height: 180vh;
+    transform: translateZ(0);
+    width: 100vw;
+    top: 0;
+}
+
 .particles {
     position: absolute;
     width: 100%;
@@ -6,11 +15,4 @@
     background-repeat: no-repeat;
     background-size: 20%;
     background-position: 50% 50%;
-}
-
-.particles-container {
-    display: flex;
-    position: relative;
-    height: 180vh;
-    transform: translateZ(0);
 }
