@@ -3,7 +3,7 @@
     flex-direction: column;
     height: auto;
     width: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 #initek-placeholder span {
@@ -26,6 +26,7 @@
 #initek-aboutus {
     display: flex;
     justify-content: center;
+    height: 100vh;
 }
 
 #initek-services {

@@ -32,24 +32,18 @@ const Card = ({id, title, description, href, placeholder, img, alt, color, tags}
 
     return (
         <section className="card" id={id}>
-            <article ref={articleRef}>
-                <span>
-                    {tags.map(tag => <Tag name={tag}/>)}
-                    <header>
-                        <h2>{title}</h2>
-                    </header>
-
-                    <p>{description}</p>
-                </span>
-
-                <span className='card-cta'>
-                    Read More
-                </span>
-            </article>
-
             <a ref={ref} onClick={handleAnchorClick} href={href} className={img ? '' : 'no-preview'} style={{backgroundColor: color}}>
                 {image}
             </a>
+
+            <article ref={articleRef}>
+                {tags.map(tag => <Tag name={tag}/>)}
+                <header>
+                    <h2>{title}</h2>
+                </header>
+
+                <p>{description}</p>
+            </article>
         </section>
     );
 };

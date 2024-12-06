@@ -1,15 +1,9 @@
-.card {
-    display: flex;
-    justify-content: space-between;
+section.card {
     margin: 16px;
-    height: 280px;
-    width: 100%;
-    max-width: 1200px;
-    margin: 16px 48px;
-    background-color: var(--compcolor4);
+    height: 640px;
+    width: 560px;
+    /* background-color: white; */
     transition: all 0.5s ease-in-out;
-    border-radius: 5px;
-    border: 1px solid var(--compcolor6);
 }
 
 .card > a.transition {
@@ -32,10 +26,6 @@
     opacity: 0;
 }
 
-.card:hover {
-    box-shadow: 5px 5px 5px var(--compcolor10);
-}
-
 section.card:has(a:hover) {
     /* width: 620px; */
 }
@@ -43,26 +33,25 @@ section.card:has(a:hover) {
 .card > a {
     display: flex;
     position: relative;
-    margin: 24px;
+    margin: 0;
     left: 0px;
     top: 0px;
-    height: auto;
-    min-width: 380px;
-    /* width: 200vw; */
-    width: auto;
-    /* max-height: calc(640px *0.66); */
+    height: 500vh;
+    width: 200vw;
+    max-width: 560px;
+    max-height: calc(640px *0.66);
     background-color: var(--compcolor4);
     overflow-x: hidden !important;
-    border-radius: 5px 5px;
+    border-radius: 16px;
     cursor: pointer;
     transition: all 0.5s ease-in-out;
     transform-origin: center center;
-    /* box-shadow: 5px 5px 5px var(--compcolor10); */
+    box-shadow: 5px 5px 5px var(--compcolor10);
     text-decoration: none;
 }
 
 .card > a:hover {
-    margin: -16px;
+    /* max-width: 620px; */
 }
 
 .card > a.no-preview {
@@ -71,13 +60,8 @@ section.card:has(a:hover) {
 }
 
 .card > article {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 50%;
-    margin: 32px;
+    margin: 16px 8px;
     transition: opacity 0.1s;
-    font-family: Poppins;
 }
 
 .card img {
@@ -88,9 +72,8 @@ section.card:has(a:hover) {
 }
 
 .card p {
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 500;
-    font-family: Lato;
 }
 
 .card-tag {
@@ -98,12 +81,7 @@ section.card:has(a:hover) {
     padding: 8px;
     margin-right: 8px;
     background-color: var(--color12);
-    border-radius: 24px;
+    border-radius: 4px;
     font-size: 0.8rem;
-    font-weight: 600;
-}
-
-.card-cta {
-    font-size: 1.1rem;
     font-weight: 600;
 }
