@@ -1,13 +1,36 @@
+@keyframes rotate-particles {
+	from {
+	  transform: rotate(90deg);
+	}
+	to {
+	  transform: rotate(450deg);
+	}
+}
+
 .particles-container {
     display: flex;
     position: absolute;
-    height: 180vh;
-    transform: translateZ(0);
+    /* width: 100%;
+    height: 140vh; */
+    width: 50vw;
+    height: 50vw;
+    /* left: -10vw;
+    top: -24vh; */
+    /* transform-origin: 100% 50%; */
+    overflow: hidden;
+    /* animation: rotate-particles 20s linear infinite; */
+    background-color: black;
+}
+.particles-container img {
+    display: flex;
+    /* position: absolute; */
     width: 100vw;
-    top: 0;
+    /* height: 180vw; */
+    left: -10vw;
+    top: -24vh;
 }
 
-.particles {
+#particles {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -15,4 +38,5 @@
     background-repeat: no-repeat;
     background-size: 20%;
     background-position: 50% 50%;
+    overflow: hidden;
 }

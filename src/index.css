@@ -78,29 +78,37 @@ section {
 
 }
 
-@keyframes rotate {
+@keyframes rotate-gradient {
 	from {
-	  transform: rotate(0deg);
+	  transform: rotate(-140deg);
 	}
 	to {
-	  transform: rotate(360deg);
+	  transform: rotate(220deg);
 	}
-  }
+}
 
 #cycle-gradient-container {
 	/* display: flex; */
-	height: 75vh;
-	width: 100%;
-	overflow: hidden;
+	/* height: 100vh; */
+	/* width: 100%; */
+	/* overflow: hidden; */
 }
 
 #cycle-gradient {
 	display: flex;
-	position: relative;
-	width: 500vw;
+	position: absolute;
+	height: 100vh;
+	/* width: 500vw;
 	min-width: 2000px;
 	top: -200vw;
-	left: -20vw;
+	left: -20vw; */
+	animation: rotate-gradient 20s linear infinite;
+}
 
-	animation: rotate 400s linear infinite;
+
+
+#landing {
+	height: 70vh;
+	width: 100%;
+	/* overflow: hidden; */
 }
