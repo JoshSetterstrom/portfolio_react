@@ -1,10 +1,9 @@
-import React, { useEffect, useRef } from 'react';
-import ReactDOM from 'react-dom/client';
 import './index.css';
-import OrbitParticles from './particles';
-import waveTransition from './transition-wave';
-import calculateOpacityColor from './getColor';
-import daynight from './assets/daynightgradient.png'
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Landing from './landing';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -12,12 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <main>
-            <section id='landing'>
-                {/* <div id='cycle-gradient-container'>
-                    <img id='cycle-gradient' src={daynight}/>
-                </div> */}
-                <OrbitParticles particleCount={20} particleSize={2} particleSpeed={0.1} gradient={["var(--compcolor24) 0%", "var(--compcolor22) 100%"]}/>
-            </section>
+            <Landing />
 		</main>
     </React.StrictMode>
 );
