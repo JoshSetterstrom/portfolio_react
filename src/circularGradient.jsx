@@ -1,32 +1,27 @@
 import './circularGradient.css';
 import img from './assets/daynightgradient.png';
-import { useEffect, useRef } from 'react';
-import { globalState } from './options';
-
-// Variable to store the current rotation
-let globalRotation = process.env.REACT_APP_GLOBAL_ROTATION;
+import { useEffect, useRef, useState } from 'react';
 
 const CircularGradient = ({ options }) => {
     const animationRef = useRef(null);
     const lastTimeRef = useRef(performance.now());
-    const durationRef = useRef(options.duration);
-
-    useEffect(() => {
-        durationRef.current = options.duration;
-    }, [options.duration]);
 
     useEffect(() => {
         const animate = (currentTime) => {
             const elapsed = currentTime - lastTimeRef.current;
+
             lastTimeRef.current = currentTime;
 
-            // Calculate the new rotation and update the global variable
-            globalState.rotation = (globalState.rotation + (elapsed / durationRef.current) * 360) % 360;
+            const speedCoefficient = (360/86400000) * options.speed.current;
 
-            // Apply the rotation to the element directly
+            options.animationRotation.current = (options.animationRotation.current + speedCoefficient * elapsed) % 360;
+
+            const totalRotation = (options.userRotation.current + options.animationRotation.current) % 360;
+
             const circularGradient = document.getElementById('circular-gradient');
+
             if (circularGradient) {
-                circularGradient.style.transform = `rotate(${globalState.rotation}deg)`;
+                circularGradient.style.transform = `rotate(${totalRotation}deg)`;
             }
 
             animationRef.current = requestAnimationFrame(animate);
