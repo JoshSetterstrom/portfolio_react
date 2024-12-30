@@ -1,6 +1,6 @@
 import { useSpring, a } from '@react-spring/three';
 import { useFrame } from "@react-three/fiber";
-import { forwardRef, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from "react";
 import randomInt from './utils/randomInt';
 
 const colors = [
@@ -11,18 +11,18 @@ const colors = [
 ];
 
 const Star = forwardRef(({ options, size }, ref) => {
-    const [active, setActive] = useState(true);
-
     const color = colors[Math.floor(Math.random() * colors.length)];
 
-    const x = randomInt(-window.innerWidth/1.5, window.innerWidth/1.5);
-    const y = randomInt(-window.innerHeight/2, window.innerWidth);
+    const x = randomInt(-window.innerWidth, window.innerWidth*2);
+    const y = randomInt(-window.innerHeight, window.innerHeight*1.4);
 
     const dx = x - options.center.current[0];
     const dy = y - options.center.current[1];
 
     const radius = useRef(Math.sqrt(dx*dx + dy*dy));
-    const angleRef = useRef(-Math.atan2(dy, dx));
+    const angleRef = useRef(Math.atan2(dy, dx));
+    const initialAngle = useRef(angleRef.current);
+    const prevRads = useRef(null);
 
     const { opacity } = useSpring({
         from: {opacity: 1},
@@ -33,61 +33,66 @@ const Star = forwardRef(({ options, size }, ref) => {
     });
 
     const { scale } = useSpring({
-        from: {scale: 1},
-        to: {scale: 1.7},
+        from: {scale: options.scale.current},
+        to: {scale: options.scale.current * 1.7},
         loop: {reverse: true},
         delay: Math.random() * 100000,
         config: {duration: 1000}
     });
 
-    useEffect(() => {
-        // const interval = setInterval(() => setActive(!active), 2000);
-
-        // return () => clearInterval(interval);
-    }, []);
-
     useLayoutEffect(() => {
-        ref.current.position.set(x, y, 0);
+        ref.current.angleRef = angleRef;
+        ref.current.initialAngle = initialAngle;
+        ref.current.prevRads = prevRads;
     })
 
     useFrame((_, delta) => {
-        const speedCoefficient = (2 * Math.PI) / ((24 / options.speed.current) * 3600);
+        const [centerX, centerY] = options.center.current;
 
-        angleRef.current += speedCoefficient * delta;
+        if (options.speed.current !== 0) {
+            const speed = (2 * Math.PI) / ((24 / -options.speed.current) * 3600);
     
+            angleRef.current += speed * delta;
+            angleRef.current %= 2 * Math.PI;
+        };
+
         ref.current.position.set(
-            options.center.current[0] + radius.current * Math.cos(-angleRef.current),
-            options.center.current[1] + radius.current * Math.sin(-angleRef.current),
+            centerX + radius.current * Math.cos(angleRef.current),
+            centerY + radius.current * Math.sin(angleRef.current),
             0
         );
+    })
 
+    useFrame(() => {
+        const [centerX, centerY] = options.center.current;
         const {x, y} = ref.current.position;
-
-        const direction = options.speed.current > 0;
-
+        
         const outOfBoundsX = x > window.innerWidth/2;
         const outOfBoundsY = y < -window.innerHeight/2;
-
+        
         if (outOfBoundsX || outOfBoundsY) {
-            angleRef.current = Math.PI - angleRef.current;
+            // const rads = (options.userRotation.current * Math.PI) / 180;
+            // const newX = options.direction.current ? window.innerWidth/2 : randomInt(-window.innerWidth/1.5, window.innerWidth/1.5);
+            // const newY = options.direction.current ? randomInt(-window.innerHeight/2, window.innerWidth) : -window.innerHeight/2;
+            
+            // const dx = newX - centerX;
+            // const dy = newY - centerY;
+            
+            // ref.current.position.set(newX, newY, 0);
+            // angleRef.current = Math.atan2(dy, dx) - rads;
+            // radius.current = Math.sqrt(dx*dx + dy*dy);
 
-            const newRadius = Math.floor(Math.random() * window.innerWidth) * 1.2;
+            // console.log(prevRads)
 
-            const requiredSin = direction ? 
-                ((-window.innerHeight / 2) - options.center.current[1]) / newRadius : 
-                ((window.innerWidth / 2) - options.center.current[0]) / newRadius
-
-            if (Math.abs(requiredSin) <= 1) {
-                angleRef.current = direction ? -Math.asin(requiredSin) : -Math.acos(requiredSin);
-                radius.current = newRadius
-            }
+            // initialAngle.current = angleRef.current;
+            // prevRads.current = rads;
         }
     });
 
     return (
-        <a.mesh scale={scale} ref={ref}>
+        <a.mesh scale={scale} ref={ref} position={[x, y, 0]}>
             <circleGeometry args={size} />
-            <a.meshBasicMaterial color={color} transparent opacity={opacity}/>
+            <a.meshBasicMaterial color={color} transparent/>
         </a.mesh>
     )
 });

@@ -1,0 +1,23 @@
+#settings-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: auto;
+    width: auto;
+    padding: 8px;
+    background-color: black;
+    z-index: 100;
+    opacity: 0.6;
+}
+
+.settings-item {
+    display: flex;
+    margin: 8px;
+}
+
+.settings-item span {
+    min-width: 80px;
+    color: white;
+}

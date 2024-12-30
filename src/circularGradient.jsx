@@ -16,12 +16,10 @@ const CircularGradient = ({ options }) => {
 
             options.animationRotation.current = (options.animationRotation.current + speedCoefficient * elapsed) % 360;
 
-            const totalRotation = (options.userRotation.current + options.animationRotation.current) % 360;
-
             const circularGradient = document.getElementById('circular-gradient');
 
             if (circularGradient) {
-                circularGradient.style.transform = `rotate(${totalRotation}deg)`;
+                circularGradient.style.transform = `rotate(${options.animationRotation.current}deg)`;
             }
 
             animationRef.current = requestAnimationFrame(animate);

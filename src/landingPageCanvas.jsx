@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber';
 
 import './landingPageCanvas.css';
-import { useEffect, useState } from 'react';
+import { cloneElement, useEffect, useRef, useState } from 'react';
 
 const LandingPageCanvas = ({options}) => {
 	const [canvas, setCanvas] = useState(null);
@@ -16,13 +16,11 @@ const LandingPageCanvas = ({options}) => {
 		return () => window.removeEventListener('resize', renderCanvas);
 	}, [options.meshes]);
 
-
 	const renderCanvas = () => {
 		setCanvas(
 			<Canvas
 				id='landing-page-canvas'
 				orthographic
-				style={{ width: '100vw', height: '100vh', position: 'absolute'}}
 				camera={{
 					left: -window.innerWidth / 2,
 					right: window.innerWidth / 2,
@@ -33,7 +31,7 @@ const LandingPageCanvas = ({options}) => {
 					position: [0, 0, 10]
 				}}
 			>
-				<group>
+				<group ref={options.groupRef}>
 					{options.meshes}
 				</group>
 			</Canvas>
