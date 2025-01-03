@@ -44,6 +44,7 @@ const Star = forwardRef(({ options, size }, ref) => {
         ref.current.angleRef = angleRef;
         ref.current.initialAngle = initialAngle;
         ref.current.prevRads = prevRads;
+        ref.current.initialScale = ref.current.scale;
     })
 
     useFrame((_, delta) => {
@@ -63,36 +64,10 @@ const Star = forwardRef(({ options, size }, ref) => {
         );
     })
 
-    useFrame(() => {
-        const [centerX, centerY] = options.center.current;
-        const {x, y} = ref.current.position;
-        
-        const outOfBoundsX = x > window.innerWidth/2;
-        const outOfBoundsY = y < -window.innerHeight/2;
-        
-        if (outOfBoundsX || outOfBoundsY) {
-            // const rads = (options.userRotation.current * Math.PI) / 180;
-            // const newX = options.direction.current ? window.innerWidth/2 : randomInt(-window.innerWidth/1.5, window.innerWidth/1.5);
-            // const newY = options.direction.current ? randomInt(-window.innerHeight/2, window.innerWidth) : -window.innerHeight/2;
-            
-            // const dx = newX - centerX;
-            // const dy = newY - centerY;
-            
-            // ref.current.position.set(newX, newY, 0);
-            // angleRef.current = Math.atan2(dy, dx) - rads;
-            // radius.current = Math.sqrt(dx*dx + dy*dy);
-
-            // console.log(prevRads)
-
-            // initialAngle.current = angleRef.current;
-            // prevRads.current = rads;
-        }
-    });
-
     return (
         <a.mesh scale={scale} ref={ref} position={[x, y, 0]}>
             <circleGeometry args={size} />
-            <a.meshBasicMaterial color={color} transparent/>
+            <a.meshBasicMaterial color={color} transparent opacity={opacity}/>
         </a.mesh>
     )
 });

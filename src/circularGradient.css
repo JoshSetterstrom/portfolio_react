@@ -1,12 +1,3 @@
-@keyframes rotate-gradient {
-	from {
-	  transform: rotate(-100deg);
-	}
-	to {
-	  transform: rotate(260deg);
-	}
-}
-
 #circular-gradient-container {
 	display: flex;
 	height: 100vh;
@@ -18,11 +9,8 @@
 #circular-gradient {
 	display: flex;
 	position: absolute;
-	/* height: 200vh; */
 	width: 500vw;
-    /* height: 50vh; */
 	min-width: 2000px;
 	top: -200vw;
-	left: -20vw;
-	/* animation: rotate-gradient 20s linear infinite; */
+	left: -10vw;
 }

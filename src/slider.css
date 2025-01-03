@@ -1,0 +1,23 @@
+.slider-container {
+    display: flex;
+    width: 160px;
+    height: 16px;
+    align-items: center;
+}
+
+.slider {
+    cursor: pointer;
+    width: inherit;
+    height: 8px;
+    background-color: blue;
+    border-radius: 4px;
+}
+
+.slider-ball {
+    cursor: pointer;
+    position: absolute;
+    height: 14px;
+    width: 14px;
+    background-color: red;
+    border-radius: 8px;
+}
