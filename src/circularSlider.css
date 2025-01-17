@@ -1,0 +1,33 @@
+.circular-slider-container {
+    display: flex;
+    width: 160px;
+    height: 160px;
+    align-items: center;
+}
+
+.circular-slider {
+    width: inherit;
+    height: inherit;
+    border: 8px solid blue;
+    border-radius: 160px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.circular-slider-ball-container {
+    position: absolute;
+    width: 80px;
+    height: 14px;
+    transform-origin: right;
+    pointer-events: none;
+}
+
+.circular-slider-ball {
+    cursor: pointer;
+    position: relative;
+    height: 14px;
+    width: 14px;
+    background-color: red;
+    border-radius: 8px;
+    margin-left: -3px;
+}

@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import generateStar from "./utils/createStar";
-import Slider from './slider'
+import createStar from "./utils/createStar";
+import LinearSlider from './linearSlider'
+import CircularSlider from './circularSlider'
 import './settings.css';
+import _time from './utils/time'
+
 
 const Settings = ({options}) => {
     const [settingsValues, setSettingsValues] = useState({});
@@ -10,30 +13,52 @@ const Settings = ({options}) => {
         setSettingsValues({
             speed: {
                 value: options.speed.current,
-                type: 'number',
+                type: 'linear',
                 callback: handleSpeedChange,
-                bounds: [0, 16384]
+                step: 1,
+                bounds: [1, 16384]
             },
             rotation: {
-                value: options.userRotation.current,
-                type: 'number',
+                value: options.rotation.current,
+                type: 'circular',
                 callback: handleRotationChange,
+                step: 0.5,
                 bounds: [0, 359]
             }, 
             density: {
                 value: options.density.current,
-                type: 'number',
+                type: 'linear',
                 callback: handleDensityChange,
-                bounds: [200, 2000]
+                step: 1,
+                bounds: [0, 10000]
             }, 
             scale: {
                 value: options.scale.current,
-                type: 'number',
+                type: 'linear',
                 callback: handleScaleChange,
+                step: 0.1,
                 bounds: [0, 2]
+            },
+            animDelay: {
+                value: options.animDelay,
+                type: 'linear',
+                callback: handleAnimDelayChange,
+                step: 1,
+                bounds: [1, 25]
+            },
+            animSpeed: {
+                value: options.animSpeed,
+                type: 'linear',
+                callback: handleAnimSpeedChange,
+                step: 1,
+                bounds: [1, 10]
             }
         });
     }, []);
+
+    useEffect(() => {
+        options.setTime(_time.angleToTime(options.rotation))
+    }, [options.rotation])
 
     const handleSpeedChange = val => {
         options.speed.current = isNaN(val) ? 0 : val;
@@ -41,47 +66,44 @@ const Settings = ({options}) => {
         setSettingsValues(settingsValues => ({...settingsValues, speed: {...settingsValues.speed, value: options.speed.current}}));
     };
 
+    const handleAnimSpeedChange = val => {
+        options.setAnimSpeed(isNaN(val) ? 0 : val);
+
+        setSettingsValues(settingsValues => ({...settingsValues, animSpeed: {...settingsValues.animSpeed, value: options.animSpeed}}));
+    };
+
+    const handleAnimDelayChange = val => {
+        options.setAnimDelay(isNaN(val) ? 0 : val);
+
+        setSettingsValues(settingsValues => ({...settingsValues, animDelay: {...settingsValues.animDelay, value: options.animDelay}}));
+    };
+
     const handleRotationChange = val => {
-        options.direction.current = val > options.userRotation.current;
+        if (isNaN(val) || val > Math.PI*2) options.setRotation(0);
+        else if (val <= 0) options.setRotation(Math.PI*2);
+        else options.setRotation(val);
 
-        if (isNaN(val) || val > 359) options.userRotation.current = 0;
-        else if (val <= 0) options.userRotation.current = 360;
-        else options.userRotation.current = val;
-        
-        setSettingsValues(settingsValues => ({...settingsValues, rotation: {...settingsValues.rotation, value: options.userRotation.current}}));
+        setSettingsValues(settingsValues => ({...settingsValues, rotation: {...settingsValues.rotation, value: options.rotation}}));
 
-        options.animationRotation.current = val;
-
-        options.setMeshes(meshes => {
-            meshes.forEach(mesh => {
-                const star = mesh.ref.current;
-    
-                const rads = (-options.userRotation.current * Math.PI) / 180;
-    
-                star.angleRef.current = star.initialAngle.current + rads;
-                star.angleRef.current %= 2 * Math.PI;
-            });
-
-            return meshes;
-        });
+        options.meshRef.current.rotation.z = -val;
     };
 
     const handleDensityChange = val => {
-        options.setMeshes(meshes => {
-            const total = meshes.length;
+        val = parseInt(val);
+
+        options.setStars(stars => {
+            const total = stars.length;
 
             if (!val) {
                 options.density.current = 0;
                 return [];
             } else if (total < val) {
-                const startingKey = meshes.at(-1)?.key || 0;
-
                 options.density.current = val;
 
-                return [...meshes, ...new Array(Math.floor(val - total)).fill('').map((_, index) => generateStar(options, index+startingKey))];
+                return [...stars, ...new Array(Math.floor(val - total)).fill('').map(() => createStar(options))];
             } else {
                 options.density.current = val;
-                return meshes.slice(0, val);
+                return stars.slice(0, val);
             }
         })
 
@@ -95,28 +117,26 @@ const Settings = ({options}) => {
 
         setSettingsValues(settingsValues => ({...settingsValues, scale: {...settingsValues.scale, value: parseFloat(options.scale.current)}}));
 
-        options.setMeshes(meshes => {
-            meshes.forEach(mesh => {
-                const {x, y, z} = mesh.ref.current.initialScale;
-                const {x2, y2, z2} = mesh.ref.current.scale;
-
-                console.log(x, y, z)
-                console.log(x2, y2, z2)
+        // options.setStars(stars => {
+        //     stars.forEach(star => {
+        //         const {x, y, z} = star.ref.current.initialScale;
+        //         const {x2, y2, z2} = star.ref.current.scale;
     
-                mesh.ref.current.scale.set(x*val, y*val, z*val)
-            })
+        //         star.ref.current.scale.set(x*val, y*val, z*val)
+        //     })
 
-
-            return meshes;
-        })
-    }
+        //     return stars;
+        // });
+    };
 
     const renderSettings = () => {
         return Object.keys(settingsValues).map(key => (
             <div key={key} className="settings-item">
                 <span>{key}</span>
-                <Slider id={key} bounds={settingsValues[key].bounds} initial={settingsValues[key].value} callback={settingsValues[key].callback}/>
-                {/* <input id={key} value={settingsValues[key].value} type={settingsValues[key].type} onChange={settingsValues[key].callback}/> */}
+                {settingsValues[key].type === 'linear'
+                    ? <LinearSlider id={key} initial={settingsValues[key].value} {...settingsValues[key]}/>
+                    : <CircularSlider id={key} initial={settingsValues[key].value} {...settingsValues[key]}/>
+                }
             </div>
         ))
     }
@@ -126,7 +146,7 @@ const Settings = ({options}) => {
             {renderSettings()}
             <div className="settings-item">
                 <span>time</span>
-                <input value={options.time}/>
+                <input readOnly value={options.time.toLocaleTimeString()}/>
             </div>
         </div>
     );

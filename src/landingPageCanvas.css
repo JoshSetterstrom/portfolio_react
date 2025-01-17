@@ -1,5 +1,6 @@
-#landing-page-canvas {
-	width: 100vw;
-	height: 100vh;
-	position: absolute;
+.canvas-mesh {
+	transition: transform 0.2s ease;
+	/* width: 200vw; */
+	/* height: 200vw; */
+	/* position: absolute; */
 }
